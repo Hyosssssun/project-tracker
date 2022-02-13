@@ -1,13 +1,11 @@
 import { pool } from "../index.js"
 
-async function updateTable(){
-    const updated = await pool.query(
-        `INSERT INTO projects 
-        VALUES (1, 0, 0, 'example: tribute page(pre-course for SoC)', false)
+async function populateTable(){
+    const projectsTable = await pool.query(
+        `INSERT INTO projects (team, week, day, projectName, url)
+        VALUES (false, 0, 0, 'tribute page(pre-course)', 'https://stoic-franklin-8fc26d.netlify.app/')
         RETURNING *;`
     );
-    console.table(updated.rows);
-    return updated.rows
+    console.table(projectsTable.rows);
 }
-
-updateTable()
+populateTable()

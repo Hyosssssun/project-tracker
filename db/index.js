@@ -7,5 +7,3 @@ export const pool = new pg.Pool({
         rejectUnauthorized: false,
     },
 });
-
-console.log(db.DATABASE_URL)
