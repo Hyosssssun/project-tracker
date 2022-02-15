@@ -18,6 +18,7 @@ import { pool } from "../index.js";
 //     );
 //     console.log("url table created", urlTable.command);
 // }
+
 async function createTable() {
     const projectsTable = await pool.query(
         `CREATE TABLE IF NOT EXISTS projects (

@@ -28,4 +28,21 @@ app.use(function (err, req, res, next) {
   res.status(500).json(err)
 })
 
+
+// var whitelist = ["http://example1.com", "http://example2.com"];
+// export const corsOptions = {
+//     origin: function (origin, callback) {
+//         if (whitelist.indexOf(origin) !== -1 || !origin) {
+//             callback(null, true);
+//         } else {
+//             callback(new Error("Not allowed by CORS"));
+//         }
+//     },
+// };
+
+// app.listen(80, function () {
+//     console.log("CORS-enabled web server listening on port 80");
+// });
+
+
 export default app;
