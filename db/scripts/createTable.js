@@ -23,11 +23,11 @@ async function createTable() {
     const projectsTable = await pool.query(
         `CREATE TABLE IF NOT EXISTS projects (
             projectId SERIAL PRIMARY KEY,
-            team BOOLEAN NOT NULL,
+            team BOOLEAN,
             week INTEGER,
             day INTEGER,
-            projectName TEXT NOT NULL,
-            url TEXT NOT NULL);`
+            projectName TEXT,
+            url TEXT);`
     );
     console.log("project table created", projectsTable.command);
 }
