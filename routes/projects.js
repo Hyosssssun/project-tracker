@@ -10,6 +10,7 @@ router.get("/projects", async function (req, res) {
   console.log(allProjects)
 });
 
+/* GET the project with specific id */
 router.get("/projects/:id", async function (req, res) {
   const { id } = req.params;
   const project = await getProjectById(id);
@@ -20,12 +21,14 @@ router.get("/projects/:id", async function (req, res) {
   });
 })
 
+/* CREATE(Add) new project to the list */
 router.post("/projects", async function (req, res) {
-  const { team, week, day, projectName, url } = req. body
+  const { team, week, day, projectName, url } = req.body
   const newProject = await createProject(team, week, day, projectName, url)
   res.json({ success: true, message: `added new project`, payload: newProject })
 })
 
+/* UPDATE the project info with specific id */
 router.patch("/projects/:id", async function (req, res) {
   const { id } = req.params;
   const { team, week, day, projectName, url } = req.body;
@@ -34,6 +37,7 @@ router.patch("/projects/:id", async function (req, res) {
   res.json({ success: true, message: `updated project`, payload: updated })
 })
 
+/* DELETE the project with specific id */
 router.delete("/projects/:id", async function (req, res) {
     const { id } = req.params;
     const deleted = await deleteProject(id);
