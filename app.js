@@ -13,11 +13,11 @@ const app = express();
 app.use(logger('dev'));
 app.use(
     cors(
-    //   {
-    //     origin: "*",
-    //     methods: ["GET", "POST", "PATCH", "DELETE"],
-    //     credentials: true, mode: "no-cors",
-    // }
+      {
+        origin: "*",
+        methods: ["GET", "POST", "PATCH", "DELETE"],
+        credentials: true, mode: "no-cors",
+    }
     )
 );
 app.use(express.json());
