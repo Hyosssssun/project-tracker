@@ -2,7 +2,6 @@ import { pool } from "../db/index.js";
 
 export async function getAllProjects(){
     const data = await pool.query(`SELECT * FROM projects;`);
-    console.log('this is your status', data.rows[data.rows.length-1].status);
     return data.rows;
 }
 
@@ -15,13 +14,9 @@ export async function getProjectById(projectId){
 
 export async function createProject(team, week, day, projectName, url, projectStatus) {
     const addProject = await pool.query(
-        `INSERT INTO projects (team, week, day, projectName, url, status) VALUES($1, $2, $3, $4, $5, $6) RETURNING *;`,
+        `INSERT INTO projects (team, week, day, projectName, url, projectStatus) VALUES($1, $2, $3, $4, $5, $6) RETURNING *;`,
         [team, week, day, projectName, url, projectStatus]
     );
-        console.log(
-            "this is your status",
-            addProject.rows[addProject.rows.length - 1].projectStatus
-        );
     return addProject.rows;
 }
 

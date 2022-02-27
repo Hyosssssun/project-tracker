@@ -7,10 +7,6 @@ const router = express.Router();
 router.get("/projects", async function (req, res) {
   const allProjects = await getAllProjects();
   res.json({ success: true, message: "here is all of your projects", payload: allProjects });
-  console.log(
-      'I am router.get, my status is : ' +
-          allProjects[allProjects.length - 1].projectStatus
-  );
 });
   
 /* GET the project with specific id */
@@ -26,10 +22,10 @@ router.get("/projects/:id", async function (req, res) {
 
 /* CREATE(Add) new project to the list */
 router.post("/projects", async function (req, res) {
-    const { projectType, week, day, projectName, url, projectStatus } =
+    const { team, week, day, projectName, url, projectStatus } =
         req.body;
     const newProject = await createProject(
-        projectType,
+        team,
         week,
         day,
         projectName,
@@ -41,7 +37,6 @@ router.post("/projects", async function (req, res) {
         message: `added new project`,
         payload: newProject,
     });
-    console.log("I am router.post, my status is : " + projectStatus);
 });
 
 /* UPDATE the project info with specific id */

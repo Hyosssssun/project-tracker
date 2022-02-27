@@ -16,7 +16,8 @@ app.use(
       {
         origin: "*",
         methods: ["GET", "POST", "PATCH", "DELETE"],
-        credentials: true, mode: "no-cors",
+        credentials: true,
+        mode: "no-cors"
     }
     )
 );
@@ -36,6 +37,22 @@ app.use(function (err, req, res, next) {
   res.status(500).json(err)
 })
 
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+});
+
+app.get("/", function (req, res, next) {
+    // Handle the get for this route
+});
+
+app.post("/", function (req, res, next) {
+    // Handle the post for this route
+});
 
 // var whitelist = ["http://example1.com", "http://example2.com"];
 // export const corsOptions = {
