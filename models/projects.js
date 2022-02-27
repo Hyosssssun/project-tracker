@@ -1,37 +1,42 @@
 import { pool } from "../db/index.js";
 
 export async function getAllProjects(){
-    // const data = await pool.query(
-    //     `SELECT projects.projectId, projects.team, projects.week, projects.day, projects.projectName, urls.url FROM projects INNER JOIN urls ON urls.projectName=projects.projectName;`
-    // );
     const data = await pool.query(`SELECT * FROM projects;`);
-    console.table("Here is your project list", data.rows);
+    console.log('this is your status', data.rows[data.rows.length-1].status);
     return data.rows;
 }
 
 export async function getProjectById(projectId){
-    // const data = await pool.query(
-    //     `SELECT projects.projectId, projects.team, projects.week, projects.day, projects.projectName, urls.url FROM projects INNER JOIN urls ON urls.projectName=projects.projectName;`
-    // );
     const data = await pool.query(
         `SELECT * FROM projects WHERE projectId = $1;`, [projectId]
     );
-    console.table("Here is your project list", data.rows);
     return data.rows;
 }
 
-export async function createProject(team, week, day, projectName, url) {
+export async function createProject(team, week, day, projectName, url, projectStatus) {
     const addProject = await pool.query(
-        `INSERT INTO projects (team, week, day, projectName, url) VALUES($1, $2, $3, $4, $5) RETURNING *;`,
-        [team, week, day, projectName, url]
+        `INSERT INTO projects (team, week, day, projectName, url, status) VALUES($1, $2, $3, $4, $5, $6) RETURNING *;`,
+        [team, week, day, projectName, url, projectStatus]
     );
+        console.log(
+            "this is your status",
+            addProject.rows[addProject.rows.length - 1].projectStatus
+        );
     return addProject.rows;
 }
 
-export async function updateProject(projectId, team, week, day, projectName, url){
+export async function updateProject(
+    projectId,
+    team,
+    week,
+    day,
+    projectName,
+    url,
+    projectStatus
+) {
     const updated = await pool.query(
-        `UPDATE projects SET team = $2, week = $3, day=$4, projectName = $5, url = $6 WHERE projectId = $1 RETURNING *;`,
-        [projectId, team, week, day, projectName, url]
+        `UPDATE projects SET team = $2, week = $3, day=$4, projectName = $5, url = $6 projectStatus = $7 WHERE projectId = $1 RETURNING *;`,
+        [projectId, team, week, day, projectName, url, projectStatus]
     );
     return updated.rows;
 }

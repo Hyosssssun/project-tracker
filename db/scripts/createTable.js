@@ -27,9 +27,10 @@ async function createTable() {
             week INTEGER,
             day INTEGER,
             projectName TEXT,
-            url TEXT);`
+            url TEXT,
+            projectStatus TEXT);`
     );
-    console.log("project table created", projectsTable.command);
+    console.log("projects table created with command of ", projectsTable.command);
 }
 
 try {
